@@ -4,10 +4,10 @@ type Query {
 }
 
 type Color {
-    id: ID!
-    color_code: String!
+  id: ID!
+  color_code: String!
 }
 
 type Mutation {
-    setColor(color_code: String!): Color!
+  setColor(color_code: String!): Color!
 }
