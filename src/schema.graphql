@@ -1,5 +1,5 @@
 type Query {
-  colors(where: ColorWhereInput, filter: String, skip: Int, first: Int): [Color!]!
+  colors(filter: String, skip: Int, first: Int): [Color!]!
   color(id: ID, colorID: ID): Color
 }
 
