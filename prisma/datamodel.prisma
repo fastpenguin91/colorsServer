@@ -1,5 +1,4 @@
 type Color {
     id: ID! @id
-    createdAt: DateTime! @createdAt
     color_code: String!
 }
