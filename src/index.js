@@ -34,7 +34,7 @@ const { GraphQLServer } = require("graphql-yoga");
 const server = new GraphQLServer({
   //typeDefs: "./src/schema.graphql",
   //resolvers,
-  schema: "../prisma/datamodel.prisma,"
+  schema: "../prisma/datamodel.prisma",
   context: { prisma }
 });
 server.start(() => console.log(`Server is running on http://localhost:4000`));
