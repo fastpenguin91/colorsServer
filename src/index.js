@@ -1,5 +1,7 @@
 const { prisma } = require("./generated/prisma-client");
 const { GraphQLServer } = require("graphql-yoga");
+const { find } = require('lodash');
+
 
 const resolvers = {
   Query: {

@@ -1,6 +1,6 @@
 type Query {
   colors(filter: String, skip: Int, first: Int): [Color!]!
-  color(id: ID, colorID: ID): Color
+  color(id: ID!): Color!
 }
 
 type Color {
