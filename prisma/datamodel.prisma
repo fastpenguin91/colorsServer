@@ -2,3 +2,14 @@ type Color {
     id: ID! @id
     color_code: String!
 }
+
+type User {
+    id: ID! @id
+    name: String!
+}
+
+type Course {
+    id: ID! @id
+    title: String!
+    length: String!
+}

@@ -8,6 +8,7 @@ const server = new GraphQLServer({
 
 const graphQLOptions = {
   endpoint: 'https://eu1.prisma.sh/fastpenguin91-c6edf8/color-swatches-server/dev'
+  //endpoint: 'https://us1.prisma.sh/fastpenguin91-c6edf8/finaltest/dev'
 }
 
 server.start(graphQLOptions, () => console.log(`Server is running on http://localhost:4000`));
