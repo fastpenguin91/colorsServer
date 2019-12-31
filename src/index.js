@@ -1,6 +1,14 @@
 const { prisma } = require("./generated/prisma-client");
 const { GraphQLServer } = require("graphql-yoga");
 
+
+const resolvers = {
+  Query: {
+    info: () => `This is a test query defined in resolvers`
+  }
+}
+
+
 // I think the object here in graphqlServer and graphQLOptions are supposed to do the same thing
 // so one of them is unnecessary?
 const server = new GraphQLServer({
@@ -10,11 +18,6 @@ const server = new GraphQLServer({
   context: { prisma }
 });
 
-const resolvers = {
-  Query: {
-    info: () => `This is a test query defined in resolvers`
-  }
-}
 
 const graphQLOptions = {
   endpoint: 'https://eu1.prisma.sh/fastpenguin91-c6edf8/color-swatches-server/dev',
