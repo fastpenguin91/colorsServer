@@ -1,3 +1,4 @@
 type Query {
     random: Color!
+    info: String!
 }
