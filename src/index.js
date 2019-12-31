@@ -7,7 +7,8 @@ const server = new GraphQLServer({
 });
 
 const graphQLOptions = {
-  endpoint: 'https://eu1.prisma.sh/fastpenguin91-c6edf8/color-swatches-server/dev'
+  endpoint: 'https://eu1.prisma.sh/fastpenguin91-c6edf8/color-swatches-server/dev',
+  typeDefs: './schema.graphql'
   //endpoint: 'https://us1.prisma.sh/fastpenguin91-c6edf8/finaltest/dev'
 }
 
