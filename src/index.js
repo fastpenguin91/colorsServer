@@ -4,7 +4,15 @@ const { Prisma } = require("prisma-binding");
 const resolvers = {
   Query: {
     colors: (_, args, context, info) => {
-      return context.prisma.query.colors();
+      console.log("in colors resolver. checking args...")
+      console.log(args)
+      return context.prisma.query.colors(
+        {
+          skip: args.skip,
+          first: args.first,
+        }
+      )
+      /*This works*///return context.prisma.query.colors();
     },
     randomColor: (_, args, context, info) => {
       return context.prisma.query.colors().then(colorsArr => {
