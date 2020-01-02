@@ -1,4 +1,25 @@
+# import Post from './generated/prisma.graphql'
+# import User from './generated/prisma.graphql'
+# import Color from './generated/prisma.graphql'
+
 type Query {
-    random: Color!
-    info: String!
+  posts(searchString: String): [Post!]!
+  user(id: ID!): User
+  info: String!
+  colors(where: ColorWhereInput, orderBy: ColorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Color]!
+  randomColor: Color!
+  color(id: ID!): Color
+}
+
+type Mutation {
+  createDraft(authorId: ID!, title: String!, content: String!): Post
+  createColor(data: ColorCreateInput!): Color!
+  publish(id: ID!): Post
+  deletePost(id: ID!): Post
+  signup(name: String!): User!
+}
+
+input ColorCreateInput {
+  id: ID
+  color_code: String!
 }

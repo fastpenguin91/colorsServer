@@ -1,30 +1,119 @@
-const { prisma } = require("./generated/prisma-client");
 const { GraphQLServer } = require("graphql-yoga");
-
+const { Prisma } = require("prisma-binding");
 
 const resolvers = {
   Query: {
-    info: () => `This is a test query defined in resolvers`
-  }
+    colors: (_, args, context, info) => {
+      return context.prisma.query.colors();
+    },
+    randomColor: (_, args, context, info) => {
+      return context.prisma.query.colors().then(colorsArr => {
+        return colorsArr[Math.floor(Math.random()*colorsArr.length)];
+      });
+    },
+    info: () => `This is a test query!`,
+    posts: (_, args, context, info) => {
+      return context.prisma.query.posts(
+        {
+          where: {
+            OR: [
+              { title_contains: args.searchString },
+              { content_contains: args.searchString },
+            ],
+          },
+        },
+        info,
+      )
+    },
+    color: (_, args, context, info) => {
+      return context.prisma.query.color(
+        {
+          where: {
+            id: args.id,
+          },
+        },
+        info,
+      )
+    },
+    user: (_, args, context, info) => {
+      return context.prisma.query.user(
+        {
+          where: {
+            id: args.id,
+          },
+        },
+        info,
+      )
+    },
+  },
+  Mutation: {
+    createDraft: (_, args, context, info) => {
+      return context.prisma.mutation.createPost(
+        {
+          data: {
+            title: args.title,
+            content: args.content,
+            author: {
+              connect: {
+                id: args.authorId,
+              },
+            },
+          },
+        },
+        info,
+      )
+    },
+    publish: (_, args, context, info) => {
+      return context.prisma.mutation.updatePost(
+        {
+          where: {
+            id: args.id,
+          },
+          data: {
+            published: true,
+          },
+        },
+        info,
+      )
+    },
+    deletePost: (_, args, context, info) => {
+      return context.prisma.mutation.deletePost(
+        {
+          where: {
+            id: args.id,
+          },
+        },
+        info,
+      )
+    },
+    signup: (_, args, context, info) => {
+      return context.prisma.mutation.createUser(
+        {
+          data: {
+            name: args.name,
+          },
+        },
+        info,
+      )
+    },
+  },
 }
 
 
-// I think the object here in graphqlServer and graphQLOptions are supposed to do the same thing
-// so one of them is unnecessary?
 const server = new GraphQLServer({
-  schema: "../prisma/datamodel.prisma",
-  typeDefs: './schema.graphql',
-  resolvers: resolvers,
-  context: { prisma }
-});
+  typeDefs: 'src/schema.graphql',
+  resolvers,
+  context: req => ({
+    ...req,
+    prisma: new Prisma({
+      typeDefs: 'src/generated/prisma.graphql',
+      endpoint: 'https://us1.prisma.sh/fastpenguin91-c6edf8/finaltest/dev',
+    }),
+  }),
+})
 
 
-const graphQLOptions = {
-  endpoint: 'https://eu1.prisma.sh/fastpenguin91-c6edf8/color-swatches-server/dev',
-  typeDefs: './schema.graphql',
-  resolvers: resolvers
-  //endpoint: 'https://us1.prisma.sh/fastpenguin91-c6edf8/finaltest/dev'
-}
-
-server.start(graphQLOptions, () => console.log(`Server is running on http://localhost:4000`));
+server.start(() => console.log(`GraphQL server is running on http://localhost:4000`))
+//server.start(graphQLOptions, () => console.log(`Server is running on http://localhost:4000`));
+//server.start(graphQLOptions, () => console.log(`Server is running on http://localhost:4000`));
 
