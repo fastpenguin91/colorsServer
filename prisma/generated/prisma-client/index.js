@@ -20,6 +20,6 @@ var models = [
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `https://us1.prisma.sh/fastpenguin91-c6edf8/finaltest/dev`
+  endpoint: `https://eu1.prisma.sh/fastpenguin91-c6edf8/color-swatches-server/dev`
 });
 exports.prisma = new exports.Prisma();
