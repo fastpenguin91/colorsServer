@@ -7,14 +7,6 @@ var models = [
   {
     name: "Color",
     embedded: false
-  },
-  {
-    name: "User",
-    embedded: false
-  },
-  {
-    name: "Post",
-    embedded: false
   }
 ];
 exports.Prisma = prisma_lib_1.makePrismaClientClass({

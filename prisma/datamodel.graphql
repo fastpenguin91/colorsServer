@@ -2,17 +2,3 @@ type Color {
   id: ID! @id
   color_code: String!
 }
-
-type User {
-  id: ID! @id
-  name: String!
-  posts: [Post!]!
-}
-
-type Post {
-  id: ID! @id
-  title: String!
-  content: String!
-  published: Boolean! @default(value: false)
-  author: User!
-}
