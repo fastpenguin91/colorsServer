@@ -46,8 +46,8 @@ const server = new GraphQLServer({
     ...req,
     prisma: new Prisma({
       typeDefs: 'src/generated/prisma.graphql',
-      //endpoint: 'https://eu1.prisma.sh/fastpenguin91-c6edf8/color-swatches-server/dev',
-      endpoint: 'https://us1.prisma.sh/fastpenguin91-c6edf8/finaltest/dev',
+      endpoint: 'https://eu1.prisma.sh/fastpenguin91-c6edf8/color-swatches-server/dev',
+      //endpoint: 'https://us1.prisma.sh/fastpenguin91-c6edf8/finaltest/dev',
     }),
   }),
 })
