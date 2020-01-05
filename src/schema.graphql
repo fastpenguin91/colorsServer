@@ -1,7 +1,7 @@
 # import Color from './generated/prisma.graphql'
 
 type Query {
-  colors(where: ColorWhereInput, orderBy: ColorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Color]!
+  colors(where: ColorWhereInput, orderBy: ColorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int, filter: String): [Color]!
   randomColor: Color!
   color(id: ID!): Color
 }

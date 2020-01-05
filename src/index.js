@@ -4,10 +4,14 @@ const { Prisma } = require("prisma-binding");
 const resolvers = {
   Query: {
     colors: (_, args, context, info) => {
-      console.log("in colors resolver. checking args...")
+      console.log("Hello it works? checking args...")
       console.log(args)
+      console.log("dev mode dev mode!")
       return context.prisma.query.colors(
         {
+          where: {
+            color_code_contains: args.filter
+          },
           skip: args.skip,
           first: args.first,
         }
@@ -42,7 +46,8 @@ const server = new GraphQLServer({
     ...req,
     prisma: new Prisma({
       typeDefs: 'src/generated/prisma.graphql',
-      endpoint: 'https://eu1.prisma.sh/fastpenguin91-c6edf8/color-swatches-server/dev',
+      //endpoint: 'https://eu1.prisma.sh/fastpenguin91-c6edf8/color-swatches-server/dev',
+      endpoint: 'https://us1.prisma.sh/fastpenguin91-c6edf8/finaltest/dev',
     }),
   }),
 })
