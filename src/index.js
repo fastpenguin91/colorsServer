@@ -17,9 +17,7 @@ const resolvers = {
           }
         }`
       );
-      console.log("got count my own way");
       let count = colorsConnection.aggregate.count;
-      console.log(count);
       
       const colors = await context.prisma.query.colors({
         where: {
@@ -29,35 +27,11 @@ const resolvers = {
         first: args.first
       });
 
-      console.log("colors: ");
-      console.log(colors[0].color_code);
-
       return {
         count,
         colors
       }
 
-      /*return {
-        aggregate: {
-          count: 108
-        },
-        edges: [
-          {
-            cursor: "ck49m8kdx9khr0964dtsodo8m",
-            node: {
-              id: "ck49m8kdx9khr0964dtsodo8m",
-              color_code: "#00ff00"
-            }
-          },
-          {
-            cursor: "ck49m96i59kn60964ngpps95m",
-            node: {
-              id: "ck49m96i59kn60964ngpps95m",
-              color_code: "#00f400"
-            }
-          }
-        ]
-      };*/
     },
     async colorsConnection(_, args, context, info) {
       console.log("waduuuuuuup");
@@ -143,30 +117,8 @@ const resolvers = {
           }
         } ] };
 
-      /*return {
-        "aggregate": {
-          "count": colorsConn.aggregate.count
-        },
-      "edges": [
-        {
-          "cursor": "ck49m8kdx9khr0964dtsodo8m",
-          "node": {
-            "id": "ck49m8kdx9khr0964dtsodo8m",
-            "color_code": "#00ff00"
-          }
-        },
-        {
-          "cursor": "ck49m96i59kn60964ngpps95m",
-          "node": {
-            "id": "ck49m96i59kn60964ngpps95m",
-            "color_code": "#00f400"
-          }
-        } ] };*/
     },
     colors: (_, args, context, info) => {
-      console.log("Hello it works? checking args...");
-      console.log(args);
-      console.log("dev mode dev mode!");
       return context.prisma.query.colors({
         where: {
           color_code_contains: args.filter
@@ -174,7 +126,6 @@ const resolvers = {
         skip: args.skip,
         first: args.first
       });
-      /*This works*/ //return context.prisma.query.colors();
     },
     randomColor: (_, args, context, info) => {
       return context.prisma.query.colors().then(colorsArr => {
@@ -212,5 +163,3 @@ const server = new GraphQLServer({
 server.start(() =>
   console.log(`GraphQL server is running on http://localhost:4000`)
 );
-//server.start(graphQLOptions, () => console.log(`Server is running on http://localhost:4000`));
-//server.start(graphQLOptions, () => console.log(`Server is running on http://localhost:4000`));
