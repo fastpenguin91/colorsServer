@@ -2,8 +2,11 @@
 
 type Query {
   colors(where: ColorWhereInput, orderBy: ColorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int, filter: String): [Color]!
+  colorsConnection(where: ColorWhereInput, orderBy: ColorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int, filter: String): ColorConnection!
+  test(where: ColorWhereInput, orderBy: ColorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int, filter: String): ColorConnection!
   randomColor: Color!
   color(id: ID!): Color
+  feed(filter: String, skip: Int, first: Int, orderBy: ColorOrderByInput): Feed!
 }
 
 type Mutation {
@@ -13,4 +16,9 @@ type Mutation {
 input ColorCreateInput {
   id: ID
   color_code: String!
+}
+
+type Feed {
+  colors: [Color!]!
+  count: Int!
 }
