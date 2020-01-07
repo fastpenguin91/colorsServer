@@ -34,9 +34,6 @@ const resolvers = {
 
     },
     async colorsConnection(_, args, context, info) {
-      console.log("waduuuuuuup");
-      console.log("args.filter");
-      console.log(args);
 
       const colorsConn = await context.prisma.query.colorsConnection(
         {},
@@ -51,7 +48,6 @@ const resolvers = {
           }
         }`
       );
-      console.log(colorsConn);
 
       return {
         aggregate: {
@@ -76,7 +72,6 @@ const resolvers = {
       };
     },
     async test(_, args, context, info) {
-      console.log("async for some reason");
       colorsFilter = args.filter
         ? { color_code_contains: args.filter }
         : { color_code_contains: "" };
